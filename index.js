@@ -28,13 +28,7 @@ app.get('/', (req, res) => {
 app.post('/register', (req, res) => {
   // 회원가입할 때 필요한 정보를 client 에서 가져오면 데이터베이스에 넣어줌
   const user = new User(req.body);
-  /*
-    req.body 안에 이런식으로 들어있는 거임
-    {
-      id:"hello",
-      password:"123"
-    } 
-  */
+  
   user.save((err, doc) => { // mongodb에서 오는 method
     if(err)
       return res.json({
