@@ -1,7 +1,8 @@
-const express = require('express') // express 모듈을 가져옴
+const express = require('express'); // express 모듈을 가져옴
 const app = express() // 새로운 express 앱을 생성 
 const port = 5001
-const { User } = require("./models/User") // models 에서 생성한 User model 을 가져온다
+const config = require('./config/key');
+const { User } = require("./models/User"); // models 에서 생성한 User model 을 가져온다
 
 // application/x-www-form-urlencoded 
 
@@ -14,14 +15,14 @@ app.use(express.json());
 
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://jd06280:thddmswn99@cluster0.biuf3.mongodb.net/youtube-clone?retryWrites=true&w=majority',{
+mongoose.connect(config.mongoURI,{
 }).then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err))
 
 
 // 루트 디렉토리에 오면 hello world 출력
 app.get('/', (req, res) => { 
-  res.send('Hello World!')
+  res.send('Hello World!asdfasf')
 })
 
 app.post('/register', (req, res) => {
@@ -45,9 +46,6 @@ app.post('/register', (req, res) => {
       }) // status(200) : 성공했다는 뜻
   });
 })
-
-
-
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
