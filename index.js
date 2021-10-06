@@ -1,11 +1,11 @@
 const express = require('express'); // express 모듈을 가져옴
 const app = express() // 새로운 express 앱을 생성 
 const port = 5001
-const config = require('./config/key');
+const config = require('./server/config/key');
 const cookieParser = require('cookie-parser')
-const { auth } = require('./middleware/auth'); // mdidle ware에 서생성한 auth 를 가져와서 아래 middleware로 사용
+const { auth } = require('./server/middleware/auth'); // mdidle ware에서 생성한 auth 를 가져와서 아래 middleware로 사용
 
-const { User } = require("./models/User"); // models 에서 생성한 User model 을 가져온다
+const { User } = require("./server/models/User"); // models 에서 생성한 User model 을 가져온다
 
 // application/x-www-form-urlencoded 
 
