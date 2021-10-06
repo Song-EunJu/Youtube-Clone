@@ -88,13 +88,12 @@ userSchema.methods.generateToken = function(cb){
 userSchema.statics.findByToken = function(token, cb) {
     var user = this;
     
-
     // 토큰을 decode 한다
     jwt.verify(token, 'secretToken', function(err, decoded) { 
         // secretToken 이라는 문자열을 더해서 token을 더해서 문자열을 만들었기에 decoded 된거에는 user._id만 들어있음
         // 유저 아이디를 이용해서 유저를 찾은 다음에
         user.findOne({"_id" : decoded, "token":token}, function(err, user){
-            if(err)
+            if(err) 
                 return cb(err);
             cb(null,user)
         })

@@ -44,7 +44,7 @@ app.post('/register', (req, res) => {
   });
 })
 
-app.post('/login', (req, res) => {
+app.post('/api/users/login', (req, res) => {
   // 요청된 이메일이 DB에 있는지 찾는다
   User.findOne({ email : req.body.email }, (err, user) => {
     if(!user){ 
@@ -93,8 +93,22 @@ app.get('/api/users/auth', auth, (req,res) => {
     image : req.user.image
   }) // client에 user 정보를 전달해주면 됨
 })
-
 // callback function (req,res) 를 하기 전에 중간에서 무언가 작업을 하는 것 
+
+app.get('/api/users/logout', auth, (req, res) => {
+  // middleware에서 가져와 찾은 다음에 
+  User.findOneAndUpdate({_id: req.user._id},{token: ""},(err, user) => {
+    if(err)
+      return res.json({
+        success: false,
+        err
+      });
+    return res.status(200).send({
+      success: true
+    })
+  })
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
