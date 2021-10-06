@@ -3,6 +3,8 @@ const app = express() // 새로운 express 앱을 생성
 const port = 5001
 const config = require('./config/key');
 const cookieParser = require('cookie-parser')
+const { auth } = require('./middleware/auth'); // mdidle ware에 서생성한 auth 를 가져와서 아래 middleware로 사용
+
 const { User } = require("./models/User"); // models 에서 생성한 User model 을 가져온다
 
 // application/x-www-form-urlencoded 
@@ -77,6 +79,22 @@ app.post('/login', (req, res) => {
     })
   })
 })
+
+app.get('/api/users/auth', auth, (req,res) => {
+  // 여기까지 middleware를 통과해 왔다는 건 Authentication = True 라는 뜻
+  res.status(200).json({
+    _id : req.user._id, // auth.js 에서 req.user=user; 를 해줬기 때문
+    isAdmin: req.user.role === 0 ? false : true,
+    isAuth:true,
+    email: req.user.email,
+    name: req.user.name,
+    lastname : req.user.lastname,
+    role : req.user.role,
+    image : req.user.image
+  }) // client에 user 정보를 전달해주면 됨
+})
+
+// callback function (req,res) 를 하기 전에 중간에서 무언가 작업을 하는 것 
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
