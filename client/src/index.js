@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>, // 보여주고 싶은 component 를 넣으면 됨
   document.getElementById('root')
 );
 
