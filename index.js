@@ -1,6 +1,5 @@
 const express = require('express'); // express 모듈을 가져옴
 const app = express() // 새로운 express 앱을 생성 
-const port = 5001
 const config = require('./server/config/key');
 const cookieParser = require('cookie-parser')
 const { auth } = require('./server/middleware/auth'); // mdidle ware에서 생성한 auth 를 가져와서 아래 middleware로 사용
@@ -27,6 +26,13 @@ mongoose.connect(config.mongoURI,{
 app.get('/', (req, res) => { 
   res.send('Hello World!asdfasf')
 })
+
+app.get('/api/hello', (req, res) => {
+  /* 원래는 받은 정보로 (request)로 뭔가 가공처리해서 response로 돌려줌 */
+  res.send("안녕하세요")
+})
+
+
 
 app.post('/register', (req, res) => {
   // 회원가입할 때 필요한 정보를 client 에서 가져오면 데이터베이스에 넣어줌
@@ -109,6 +115,8 @@ app.get('/api/users/logout', auth, (req, res) => {
   })
 })
 
+
+const port = 5001
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
