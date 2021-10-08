@@ -9,7 +9,7 @@ function LandingPage() {
 
     return (
         <div>
-            LandingPage
+            <h2>시작 페이지</h2>
         </div>
     )
 }
