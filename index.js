@@ -33,8 +33,7 @@ app.get('/api/hello', (req, res) => {
 })
 
 
-
-app.post('/register', (req, res) => {
+app.post('/api/users/register', (req, res) => {
   // 회원가입할 때 필요한 정보를 client 에서 가져오면 데이터베이스에 넣어줌
   const user = new User(req.body);
   
